@@ -85,37 +85,24 @@ function animate(){
   board.draw();
   rightPlayer.draw();
   leftPlayer.draw();
-
+  ball.draw();
+  ball.move();
+  
   let x_ball_position = ball.getPosition().x;
   let y_ball_position = ball.getPosition().y;
   
-  // Ball colliding with the top of the canvas
-  if((y_ball_position - ball.radius) <= 0){
+  // Ball colliding with the top of the canvas or the bottom
+  if(((y_ball_position - ball.radius) <= 0) || ((y_ball_position + ball.radius) >= canvas.height)){
     console.log("Colicion 1");
-    ball.upToDown();
+    ball.changeYDirection();
   }
 
-  // Ball colliding with the bottom of the canvas
-  if((y_ball_position + ball.radius) >= canvas.height){
+  // Ball colliding with the left of the canvas or the right
+  if(((x_ball_position - ball.radius) <= 0) || ((x_ball_position + ball.getRadius()) >= canvas.width)){
     console.log("Colicion 2");
-    ball.downToUp();
+    ball.restart();
   }
-
-  // Ball colliding with the left of the canvas
-  if((x_ball_position - ball.radius) <= 0){
-    console.log("Colicion 3");
-    ball.leftToRight();
-  }
-
-  // Ball colliding with the right of the canvas
-  if((x_ball_position + ball.radius) >= canvas.width){
-    console.log("Colicion 4");
-    ball.rightToLeft();
-  }
-
-  ball.move();
-  ball.draw();
-  console.log(ball.getPosition());
+  
   window.requestAnimationFrame(animate);
 }
 

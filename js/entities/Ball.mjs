@@ -11,6 +11,8 @@ export default class Ball {
   restart(){
     this.x = (this.context.canvas.width / 2);
     this.y = (this.context.canvas.height / 2);
+    this.directionX = (Math.random() >= .5) ? 1 : -1;
+    this.directionY = (Math.random() >= .5) ? 1 : -1;
   }
 
   getWidth(){ return this.width; }
@@ -24,33 +26,28 @@ export default class Ball {
     this.context.stroke();
   }
 
-  upToDown(){
-    this.directionY = -1;
+  changeXDirection(){
+    this.directionX = this.directionX * -1;
   }
 
-  downToUp(){
-    this.directionY = 1;
-  }
-
-  leftToRight(){
-    this.directionX = 1;
-  }
-
-  rightToLeft(){
-    this.directionX = -1;
+  changeYDirection(){
+    this.directionY = this.directionY * -1;
   }
 
   move(){
-
+    // If the ball y_direction is UP
     if(this.directionY == 1){
       this.y -= 2;
     }else{
+      // If the ball y_direction is DOWN
       this.y += 2;
     }
 
+    // If the ball x_direction is RIGHT
     if(this.directionX == 1){
       this.x += 2;
     }else{
+      // If the ball x_direction is LEFT
       this.x -= 2;
     }
   }
@@ -59,4 +56,7 @@ export default class Ball {
     return { x: this.x, y: this.y };
   }
 
+  getRadius(){
+    return this.radius;
+  }
 }
