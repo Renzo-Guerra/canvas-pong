@@ -4,6 +4,8 @@ export default class Ball {
     this.color = color;
     this.context = context;
     this.restart();
+    this.directionX = (Math.random() >= .5) ? 1 : -1;
+    this.directionY = (Math.random() >= .5) ? 1 : -1;
   }
 
   restart(){
@@ -21,4 +23,40 @@ export default class Ball {
     this.context.closePath();
     this.context.stroke();
   }
+
+  upToDown(){
+    this.directionY = -1;
+  }
+
+  downToUp(){
+    this.directionY = 1;
+  }
+
+  leftToRight(){
+    this.directionX = 1;
+  }
+
+  rightToLeft(){
+    this.directionX = -1;
+  }
+
+  move(){
+
+    if(this.directionY == 1){
+      this.y -= 2;
+    }else{
+      this.y += 2;
+    }
+
+    if(this.directionX == 1){
+      this.x += 2;
+    }else{
+      this.x -= 2;
+    }
+  }
+
+  getPosition(){
+    return { x: this.x, y: this.y };
+  }
+
 }
