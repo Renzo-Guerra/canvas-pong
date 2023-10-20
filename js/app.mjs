@@ -1,3 +1,4 @@
+import Ball from "./entities/Ball.mjs";
 import Board from "./entities/Board.mjs";
 import Player from "./entities/Player.mjs";
 
@@ -9,9 +10,9 @@ const context = canvas.getContext('2d');
 const board = new Board(canvas.width, canvas.clientHeight, "rgb(240, 240, 240)", context);
 
 // Creating players
-const leftPlayer = new Player("rgb(204, 54, 4", 1, context);
-const rightPlayer = new Player("rgb(204, 54, 4", 2, context);
-
+const leftPlayer = new Player("rgb(204, 54, 4)", 1, context);
+const rightPlayer = new Player("rgb(204, 54, 4)", 2, context);
+const ball = new Ball(20, "rgb(10, 40, 200)", context);
 /**
  * Multiple "keyDown" and "keyUp" events must be handled simultaneously. 
  * Therefore, the posible pressed keys are stored in an object, keeping 
@@ -84,6 +85,7 @@ function animate(){
   board.draw();
   rightPlayer.draw();
   leftPlayer.draw();
+  ball.draw();
   window.requestAnimationFrame(animate);
 }
 
