@@ -1,0 +1,17 @@
+:root{
+  --background-color: rgba(29, 29, 29, 0.8);
+}
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--background-color);
+  min-height: 100vh;
+}
