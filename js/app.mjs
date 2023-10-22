@@ -7,7 +7,9 @@ const canvas = document.getElementById("canvas");
 const context = canvas.getContext('2d');
 
 // Creating the board
-const board = new Board(canvas.width, canvas.clientHeight, "rgb(240, 240, 240)", context);
+const board = new Board(context.canvas.width, context.canvas.height, "rgb(240, 240, 240)", context);
+
+console.log(`width: ${board.getWidth()}, height: ${board.getHeight()}`);
 
 // Creating players
 const leftPlayer = new Player("rgb(204, 54, 4)", 1, context);
@@ -88,21 +90,26 @@ function animate(){
   ball.draw();
   ball.move();
   
+  leftPlayer.playerTouchingBall(ball);
+  rightPlayer.playerTouchingBall(ball);
+
   let x_ball_position = ball.getPosition().x;
   let y_ball_position = ball.getPosition().y;
   
   // Ball colliding with the top of the canvas or the bottom
-  if(((y_ball_position - ball.radius) <= 0) || ((y_ball_position + ball.radius) >= canvas.height)){
+  if(((y_ball_position - ball.radius) <= 0) || 
+  ((y_ball_position + ball.radius) >= canvas.height)){
     console.log("Colicion 1");
     ball.changeYDirection();
   }
 
   // Ball colliding with the left of the canvas or the right
-  if(((x_ball_position - ball.radius) <= 0) || ((x_ball_position + ball.getRadius()) >= canvas.width)){
+  if(((x_ball_position - ball.radius) <= 0) || 
+  ((x_ball_position + ball.getRadius()) >= canvas.width)){
     console.log("Colicion 2");
     ball.restart();
   }
-  
+
   window.requestAnimationFrame(animate);
 }
 
